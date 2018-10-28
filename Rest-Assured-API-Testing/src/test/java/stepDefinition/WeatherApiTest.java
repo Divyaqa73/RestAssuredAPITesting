@@ -23,19 +23,17 @@ public class WeatherApiTest {
 
 	
 	@Before
-	@Given("^Launce the API$")
-	public void launce_the_API() throws Throwable {
-		RestAssured.baseURI = "http://api.openweathermap.org/";   
-	 
+	@Given("^Launch the API$")
+	public void launch_the_API() throws Throwable {
+		RestAssured.baseURI = "http://api.openweathermap.org/";	 
 	}
 
-	@Then("^The Response code is succesfull for \"([^\"]*)\"$")
-	public void the_Response_code_is_succesfull(String uri) throws Throwable {
+	@Then("^The Response code is successful for \"([^\"]*)\"$")
+	public void the_Response_code_is_successful(String uri) throws Throwable {
 		given().when().
 		get(uri).
 		then()
-		.statusCode(200);
-	 
+		.statusCode(200);	 
 	}
 
 	@Then("^The Response code if negative$")
@@ -43,8 +41,7 @@ public class WeatherApiTest {
 		given().when().
 		get(uri).
 		then().
-		body("message", equalTo("city not found"), "cod", equalTo("404"));
-	 
+		body("message", equalTo("city not found"), "cod", equalTo("404"));	 
 	}
 
 	@Then("^The Response is in JSON format for \"([^\"]*)\"$")
@@ -53,13 +50,11 @@ public class WeatherApiTest {
 		get(uri).
 		then().
 		assertThat().
-		contentType("application/json");
-	 
+		contentType("application/json");	 
 	}
 
 	@Then("^Validate the temperature range for \"([^\"]*)\"$")
 	public void validate_the_temperature_range(String uri) throws Throwable {
-	   
 		float minTemp = given().
 				when().
 				get(uri).
@@ -77,20 +72,11 @@ public class WeatherApiTest {
 						then().extract().
 				        path("main.temp");
 				
-				
-				Assert.assertTrue(minTemp <= temp && temp <= maxTemp);
-				
+		Assert.assertTrue(minTemp <= temp && temp <= maxTemp);				
 	}
 
-	@Then("^The City name is displayed as expected for \"([^\"]*)\"$")
-	public void the_City_name_is_displayed_as_expected() throws Throwable {
-	    
-	 
-	}
-
-	@Then("^The Key IsInvisible is not availabe in the response for \"([^\"]*)\"$")
-	public void the_Key_name_is_availabe_in_the_response(String uri) throws Throwable {
-	    
+	@Then("^The Key name is available in the response for \"([^\"]*)\"$")
+	public void the_Key_name_is_available_in_the_response(String uri) throws Throwable {
 		given().when().
 		get(uri).
 		then().
@@ -98,9 +84,8 @@ public class WeatherApiTest {
 			body("$", hasKey("name"));
 	}
 
-	@Then("^The Key IsInvisible is not availabe in the response$")
-	public void the_Key_IsInvisible_is_not_availabe_in_the_response(String uri) throws Throwable {
-	    
+	@Then("^The Key IsInvisible is not available in the response for \"([^\"]*)\"$")
+	public void the_Key_IsInvisible_is_not_available_in_the_response(String uri) throws Throwable {
 		given().when().
 		get(uri).
 		then().
@@ -110,7 +95,6 @@ public class WeatherApiTest {
 
 	@Then("^Validate response time for \"([^\"]*)\"$")
 	public void validate_response_time(String uri) throws Throwable {
-	    
 		given().when().
 		get(uri).
 		then().
