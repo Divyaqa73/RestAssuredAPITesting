@@ -9,7 +9,7 @@ import cucumber.api.junit.Cucumber;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-		 features = "Feature"		
+		 features = "Feature" //"/ValidateCitiesBasedOnIds.feature"		
 		,glue={"stepDefinition"}
 		,plugin = {"com.cucumber.listener.ExtentCucumberFormatter:"},
 		 monochrome = true
